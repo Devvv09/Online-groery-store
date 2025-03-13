@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Grocery Store</title>
+    
+    <style>
+        /* CSS (Previously in styles.css) */
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        input {
+            margin: 5px;
+            padding: 8px;
+        }
+
+        button {
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        #productList {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .product {
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 200px;
+            text-align: center;
+        }
+
+        .product img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <h1>Online Grocery Store</h1>
+
+    <!-- Form for adding new products -->
+    <form id="productForm">
+        <input type="text" id="productName" placeholder="Product Name" required>
+        <input type="number" id="productPrice" placeholder="Price" required>
+        <input type="text" id="productImage" placeholder="Image URL">
+        <button type="submit">Add Product</button>
+    </form>
+
+    <!-- Section to display products -->
+    <div id="productList"></div>
+
+    <script>
+        // JavaScript (Previously in script.js)
+        document.addEventListener("DOMContentLoaded", () => {
+            const productForm = document.getElementById("productForm");
+            const productList = document.getElementById("productList");
+
+            productForm.addEventListener("submit", (event) => {
+                event.preventDefault(); // Prevent form from reloading the page
+
+                // Get values from the form
+                const name = document.getElementById("productName").value;
+                const price = document.getElementById("productPrice").value;
+                const imageUrl = document.getElementById("productImage").value || "https://via.placeholder.com/100"; // Default image if none is provided
+
+                // Create a new product element
+                const productDiv = document.createElement("div");
+                productDiv.classList.add("product");
+
+                productDiv.innerHTML = `
+                    <img src="${imageUrl}" alt="${name}">
+                    <h3>${name}</h3>
+                    <p>Price: ₹${price}</p>
+                `;
+
+                // Append the new product to the product list
+                productList.appendChild(productDiv);
+
+                // Clear the form
+                productForm.reset();
+            });
+        });
+    </script>
+</body>
+</html>
